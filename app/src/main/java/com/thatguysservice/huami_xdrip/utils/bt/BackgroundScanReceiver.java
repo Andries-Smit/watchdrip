@@ -76,9 +76,10 @@ public class BackgroundScanReceiver extends BroadcastReceiver {
                 UserError.Log.d(caller, "Scan results received: " + matchedMac + " " + scanResults);
                 if (!calledBack) {
                     try {
-                        // bit of an ugly fix to system wide persistent nature of background scans and lack of proper support for one hit over various android devices
+                        int intentFlag = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE : PendingIntent.FLAG_UPDATE_CURRENT;
+                                        // bit of an ugly fix to system wide persistent nature of background scans and lack of proper support for one hit over various android devices
                         backgroundScanner.stopBackgroundBleScan(PendingIntent.getBroadcast(HuamiXdrip.getAppContext(), 142, // must match original
-                                intent, PendingIntent.FLAG_UPDATE_CURRENT));
+                                intent, intentFlag));
                     } catch (Exception e) {
                         //
                     }

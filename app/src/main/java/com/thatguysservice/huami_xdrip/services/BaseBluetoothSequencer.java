@@ -170,8 +170,9 @@ public abstract class BaseBluetoothSequencer extends BaseBluetoothService implem
 
     private void registerScanReceiver() {
         if (scanCallBack == null) {
+            int intentFlag = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE : PendingIntent.FLAG_UPDATE_CURRENT;
             scanCallBack = PendingIntent.getBroadcast(HuamiXdrip.getAppContext(), SCAN_REQUEST_CODE,
-                    new Intent(HuamiXdrip.getAppContext(), BackgroundScanReceiver.class).setAction(getIntentFilterName()).putExtra("CallingClass", this.getClass().getSimpleName()), PendingIntent.FLAG_UPDATE_CURRENT);
+                    new Intent(HuamiXdrip.getAppContext(), BackgroundScanReceiver.class).setAction(getIntentFilterName()).putExtra("CallingClass", this.getClass().getSimpleName()), intentFlag);
         }
         BackgroundScanReceiver.addCallBack2(this, this.getClass().getSimpleName());
     }

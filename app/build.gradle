@@ -28,7 +28,7 @@ android {
     defaultConfig {
         applicationId "com.thatguysservice.huami_xdrip"
         minSdkVersion 18
-        targetSdkVersion 29
+        targetSdkVersion 31
 
         // Note: always bump BOTH versionCode and versionName!
         versionName "0.2.0.3"
